@@ -1,4 +1,15 @@
 import os
+import shutil
+from normalize import normalize
+
+def get_extension(filename):
+    return os.path.splitext(filename)[1].lower()
+
+def move_to_category(file_path, category_folder):
+    try:
+        shutil.move(file_path, os.path.join(category_folder, os.path.basename(file_path)))
+    except Exception as e:
+        print(f"Error moving file: {e}")
 
 def organize_files(src_folder, dest_folder):
     try:

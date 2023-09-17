@@ -1,7 +1,7 @@
-import shutil
+import os
 import sys
 from normalize import normalize
-from organize_files import *
+from organize_files import organize_files
 
 # Lista rozszerzeń plików dla każdej kategorii
 file_extensions = {
@@ -14,7 +14,6 @@ file_extensions = {
 
 def get_extension(filename):
     return os.path.splitext(filename)[1].lower()
-
 
 def move_to_category(file_path, category_folder):
     try:
