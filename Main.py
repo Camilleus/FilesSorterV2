@@ -1,15 +1,71 @@
-def normalize(input_str):
-    transliteration_dict = {
-        'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
-        'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
-        'Ą': 'A', 'Ć': 'C', 'Ę': 'E', 'Ł': 'L', 'Ń': 'N',
-        'Ó': 'O', 'Ś': 'S', 'Ź': 'Z', 'Ż': 'Z'
-    }
-    normalized_str = ''.join(transliteration_dict.get(char, char) for char in input_str)
-    normalized_str = ''.join(char if char.isalnum() else '_' for char in normalized_str)
-    return normalized_str
+import shutil
+import sys
+from normalize import normalize
+from organize_files import *
 
-# Przykład użycia:
-input_str = "Zażółć GĘŚLĄ jaźń! 123"
-normalized = normalize(input_str)
-print(normalized)  # Wynik: "Zazolc_GESLA_jazn_123"
+# Lista rozszerzeń plików dla każdej kategorii
+file_extensions = {
+    'Images': ('.jpeg', '.jpg', '.png', '.svg'),
+    'Videos': ('.avi', '.mp4', '.mov', '.mkv'),
+    'Documents': ('.doc', '.docx', '.txt', '.pdf', '.xlsx', '.pptx'),
+    'Music': ('.mp3', '.ogg', '.wav', '.amr'),
+    'Archives': ('.zip', '.gz', '.tar')
+}
+
+def get_extension(filename):
+    return os.path.splitext(filename)[1].lower()
+
+
+def move_to_category(file_path, category_folder):
+    shutil.move(file_path, os.path.join(category_folder, os.path.basename(file_path)))
+
+
+
+
+def list_files_in_category(category_folder):
+    files_list = []
+    for _, _, files in os.walk(category_folder):
+        for filename in files:
+            files_list.append(filename)
+    return files_list
+
+
+def list_files_in_categories(dest_folder):
+    # Tworzy listę plików w każdej kategorii
+    for category, _ in file_extensions.items():
+        category_folder = os.path.join(dest_folder, category)
+        print(f'{category}:')
+        files_list = list_files_in_category(category_folder)
+        for filename in files_list:
+            print(f'    {filename}')
+
+
+def list_known_extensions(dest_folder):
+    # Tworzy listę znanych rozszerzeń plików w folderze docelowym
+    known_extensions = set()
+    for _, _, files in os.walk(dest_folder):
+        for filename in files:
+            extension = get_extension(filename)
+            known_extensions.add(extension)
+    print('Known File Extensions:')
+    for ext in known_extensions:
+        print(f'    {ext}')
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python sort.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
+        sys.exit(1)
+
+    src_folder = sys.argv[1]
+    dest_folder = os.path.join(src_folder, 'Sorted')
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
+
+    organize_files(src_folder, dest_folder)
+    list_files_in_categories(dest_folder)
+    list_known_extensions(dest_folder)
+
+
+if __name__ == "__main__":
+    main()
