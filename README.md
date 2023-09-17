@@ -10,3 +10,5 @@ Przejdź do katalogu, w którym znajduje się twój plik Main.py. Możesz to zro
 Następnie możesz uruchomić swój skrypt za pomocą polecenia python, podając jako argument ścieżkę do folderu, który ma zostać posortowany, na przykład:
   python Main.py "C:\\ścieżka\\do\\twojego\\folderu"
   Upewnij się, że używasz pojedynczych cudzysłowów (" ") wokół ścieżki do folderu, jeśli ścieżka zawiera spacje.
+
+Funkcja ta tworzy folder "sorted" we wskazanym folderze, tam znajdują się wszystkie posegregowane pliki, funkcja ta nie usuwa starych folderów
