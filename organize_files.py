@@ -11,7 +11,7 @@ def move_to_category(file_path, category_folder):
     except Exception as e:
         print(f"Error moving file: {e}")
 
-def organize_files(src_folder, dest_folder):
+def organize_files(src_folder, dest_folder, file_extensions):
     try:
         unknown_folder = os.path.join(dest_folder, 'Unknown')
         image_extensions = ('.jpeg', '.jpg', '.png', '.svg')

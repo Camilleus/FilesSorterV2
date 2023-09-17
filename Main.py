@@ -61,7 +61,7 @@ def list_known_extensions(dest_folder):
 def main():
     try:
         if len(sys.argv) != 2:
-            print("Usage: python sort.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
+            print("Usage: python Main.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
             sys.exit(1)
 
         src_folder = sys.argv[1]
@@ -69,7 +69,7 @@ def main():
         if not os.path.exists(dest_folder):
             os.makedirs(dest_folder)
 
-        organize_files(src_folder, dest_folder)
+        organize_files(src_folder, dest_folder, file_extensions)
         list_files_in_categories(dest_folder)
         list_known_extensions(dest_folder)
     except Exception as e:
