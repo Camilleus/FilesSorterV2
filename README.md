@@ -3,6 +3,7 @@ It's me, Camilleus Rex,
 And This is my 1. Python Homework for GoIT
 
 By tą funkcje odpalić:
+Pobierz ten kod na swój komputer 
 Otwórz wiersz poleceń (cmd) w systemie operacyjnym.
 Przejdź do katalogu, w którym znajduje się twój plik Main.py. Możesz to zrobić za pomocą komendy cd, na przykład:
   " cd "Ścieżka_do_katalogu_z_Main.py" "  
