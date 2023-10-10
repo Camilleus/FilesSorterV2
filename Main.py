@@ -1,9 +1,10 @@
 import os
 import sys
-from normalize import normalize
-from organize_files import organize_files
+import shutil
+from normalize import *
+from organize_files import *
 
-# Lista rozszerzeń plików dla każdej kategorii
+
 file_extensions = {
     'Images': ('.jpeg', '.jpg', '.png', '.svg'),
     'Videos': ('.avi', '.mp4', '.mov', '.mkv'),
@@ -32,7 +33,6 @@ def list_files_in_category(category_folder):
 
 def list_files_in_categories(dest_folder):
     try:
-        # Tworzy listę plików w każdej kategorii
         for category, _ in file_extensions.items():
             category_folder = os.path.join(dest_folder, category)
             print(f'{category}:')
@@ -43,9 +43,8 @@ def list_files_in_categories(dest_folder):
         print(f"Error listing files in categories: {e}")
 
 
-def list_known_extensions(dest_folder):
+def list_of_known_extensions(dest_folder):
     try:
-        # Tworzy listę znanych rozszerzeń plików w folderze docelowym
         known_extensions = set()
         for _, _, files in os.walk(dest_folder):
             for filename in files:
@@ -71,7 +70,7 @@ def main():
 
         organize_files(src_folder, dest_folder, file_extensions)
         list_files_in_categories(dest_folder)
-        list_known_extensions(dest_folder)
+        list_of_known_extensions(dest_folder)
     except Exception as e:
         print(f"An error occurred: {e}")
 
