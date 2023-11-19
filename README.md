@@ -1,6 +1,6 @@
 Hello There! 
 It's me, Camilleus Rex,
-And This is my 1. Python Homework for GoIT
+And This is my files in directory sorting program
 
 By tą funkcje odpalić:
 Pobierz ten kod na swój komputer 
