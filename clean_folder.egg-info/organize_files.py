@@ -19,7 +19,7 @@ def organize_files(src_folder, dest_folder, file_extensions):
 
 def organize_file(file_path, dest_folder, file_extensions):
     try:
-        extension = get_extension(filename)
+        extension = get_extension(file_path)
         for category, extensions in file_extensions.items():
             if extension in extensions:
                 category_folder = os.path.join(dest_folder, category)
@@ -29,3 +29,12 @@ def organize_file(file_path, dest_folder, file_extensions):
                 break
     except Exception as e:
         print(f"Error organizing file {file_path}: {e}")
+
+def get_extension(filename):
+    return os.path.splitext(filename)[1].lower()
+
+def move_to_category(file_path, category_folder):
+    try:
+        shutil.move(file_path, os.path.join(category_folder, os.path.basename(file_path)))
+    except Exception as e:
+        print(f"Error moving file: {e}")
