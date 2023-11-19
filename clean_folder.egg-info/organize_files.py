@@ -3,6 +3,15 @@ import shutil
 from normalize import normalize
 from concurrent.futures import ThreadPoolExecutor
 
+file_extensions = {
+    'Images': ('.jpeg', '.jpg', '.png', '.svg'),
+    'Videos': ('.avi', '.mp4', '.mov', '.mkv'),
+    'Documents': ('.doc', '.docx', '.txt', '.pdf', '.xlsx', '.pptx'),
+    'Music': ('.mp3', '.ogg', '.wav', '.amr'),
+    'Archives': ('.zip', '.gz', '.tar')
+}
+
+
 def organize_files(src_folder, dest_folder, file_extensions):
     try:
         if not os.path.exists(dest_folder):
@@ -29,6 +38,7 @@ def organize_file(file_path, dest_folder, file_extensions):
                 break
     except Exception as e:
         print(f"Error organizing file {file_path}: {e}")
+
 
 def get_extension(filename):
     return os.path.splitext(filename)[1].lower()
