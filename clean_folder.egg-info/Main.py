@@ -45,7 +45,23 @@ def organize_file(file_path, dest_folder, file_extensions):
     except Exception as e:
         print(f"Error organizing file {file_path}: {e}")
 
-# Pozostała część kodu bez zmian
+def main():
+    try:
+        if len(sys.argv) != 2:
+            print("Usage: python main.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
+            sys.exit(1)
+
+        src_folder = sys.argv[1]
+        dest_folder = os.path.join(src_folder, 'Sorted')
+        if not os.path.exists(dest_folder):
+            os.makedirs(dest_folder)
+
+        organize_files(src_folder, dest_folder, file_extensions)
+        list_files_in_categories(dest_folder)
+        list_of_known_extensions(dest_folder)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
+
