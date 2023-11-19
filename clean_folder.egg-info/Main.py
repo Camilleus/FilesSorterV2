@@ -13,6 +13,14 @@ file_extensions = {
     'Archives': ('.zip', '.gz', '.tar')
 }
 
+def list_files_in_category(category_folder):
+    files_list = []
+    for _, _, files in os.walk(category_folder):
+        for filename in files:
+            files_list.append(filename)
+    return files_list
+
+
 def list_files_in_categories(dest_folder):
     try:
         for category, _ in file_extensions.items():
