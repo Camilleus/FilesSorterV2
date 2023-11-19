@@ -45,10 +45,35 @@ def organize_file(file_path, dest_folder, file_extensions):
     except Exception as e:
         print(f"Error organizing file {file_path}: {e}")
 
+def list_files_in_categories(dest_folder):
+    try:
+        for category, _ in file_extensions.items():
+            category_folder = os.path.join(dest_folder, category)
+            print(f'{category}:')
+            files_list = list_files_in_category(category_folder)
+            for filename in files_list:
+                print(f'    {filename}')
+    except Exception as e:
+        print(f"Error listing files in categories: {e}")
+
+def list_of_known_extensions(dest_folder):
+    try:
+        known_extensions = set()
+        for _, _, files in os.walk(dest_folder):
+            for filename in files:
+                extension = get_extension(filename)
+                known_extensions.add(extension)
+        print('Known File Extensions:')
+        for ext in known_extensions:
+            print(f'    {ext}')
+    except Exception as e:
+        print(f"Error listing known extensions: {e}")
+
+
 def main():
     try:
         if len(sys.argv) != 2:
-            print("Usage: python main.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
+            print("Usage: python Main.py C:\\Users\\Camil\\OneDrive\\Pulpit\\Nowyfolder")
             sys.exit(1)
 
         src_folder = sys.argv[1]
